@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: munens-mongo-pv-gpce
+spec:
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+    #  Retain policy means PV will remain if it is no longer bound to a PVC. However it will be unavailable for reuse
+  capacity:
+    storage: 1Gi
+  gcePersistentDisk:
+    pdName: munens-mongo-disk
+    fsType: ext4

@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: munens-mongo-deployment-gpce
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: munens-mongo-gpce
+  template:
+    metadata:
+      labels:
+        app: munens-mongo-gpce
+    spec:
+      containers:
+        - name: mongo
+          image: mongo:5.0
+          ports:
+            - containerPort: 9099
+          volumeMounts:
+            - mountPath: '/var/www/html'
+              name: munens-mongo-volume
+      volumes:
+        - name: munens-mongo-volume
+          persistentVolumeClaim:
+            claimName: munens-mongo-pvc-gpce
